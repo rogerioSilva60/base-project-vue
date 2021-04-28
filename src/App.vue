@@ -1,28 +1,54 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" :class="{'hide-menu': !isMenuVisible}">
+    <Header title="BPV - Base de Conhecimento" :hideToggle="false"/>
+    <Menu />
+    <Content />
+    <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "@/components/template/Header"
+import Menu from "@/components/template/Menu"
+import Content from "@/components/template/Content"
+import Footer from "@/components/template/Footer"
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header, Menu, Content, Footer
+  },
+  computed: {
+    ...mapState(['isMenuVisible'])
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    font-family: "Lato", sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  #app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 60px 1fr 40px;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 
+          "menu header"
+          "menu content"
+          "menu footer";
+  }
+
+  #app.hide-menu {
+    grid-template-areas: 
+          "header header"
+          "content content"
+          "footer footer";
+  }
 </style>
