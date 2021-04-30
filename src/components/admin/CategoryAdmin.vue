@@ -8,6 +8,7 @@
               <b-form-input 
                 id="category-name"
                 v-model="category.name"
+                :readonly="mode === 'remove'"
                 type="text"
                 placeholder="Informe o Nome da Categoria..."
                 required
@@ -18,8 +19,9 @@
             <b-form-group label="Categoria Pai:" label-for="category-parent">
               <b-form-select 
                 id="category-parent"
-                v-model="category.path"
+                :disabled="mode === 'remove'"
                 :options="categoryParents"
+                v-model="category.path"
               >
                 <template #first>
                   <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
@@ -85,6 +87,7 @@ export default {
     },
     methods: {
       clear(){
+        this.mode ='save'
         this.category = {
           path: null
         }

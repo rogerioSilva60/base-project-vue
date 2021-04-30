@@ -119,6 +119,7 @@ export default {
     },
     methods: {
         clear() {
+            this.mode ='save'
             this.user = {}
             this.isValidName = false
         },
