@@ -131,7 +131,7 @@ export default {
                this.isValidName = true
             } else {
                 let total = this.users.length
-                let userLocal = {...this.user, isAdmin: this.user.role, id: (total+1)}
+                let userLocal = {...this.user, isAdmin: this.user.role, id: (total + 1)}
                 this.users.push(userLocal)
             }
         },
