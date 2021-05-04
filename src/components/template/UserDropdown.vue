@@ -11,7 +11,7 @@
         <router-link :to="'admin'">
             <i class="fa fa-cogs"></i> Admin
         </router-link>
-        <a href>
+        <a href @click.prevent="logout">
             <i class="fa fa-sign-out"></i> Sair
         </a>
       </div>
@@ -21,6 +21,7 @@
 <script>
 import { mapState } from 'vuex'
 import Gravatar from 'vue-gravatar'
+import { userKey } from '@/global'
 
 export default {
     name: 'UseDropdown',
@@ -29,6 +30,13 @@ export default {
     },
     computed: {
         ...mapState(['user'])
+    },
+    methods: {
+        logout() {
+            localStorage.removeItem(userKey)
+            this.$store.commit('setUser', null)
+            this.$router.push({ name: 'auth' })
+        }
     }
 }
 </script>
